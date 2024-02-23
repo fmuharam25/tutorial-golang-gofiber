@@ -7,7 +7,8 @@ import (
 )
 
 // DepartmentRouter is the Router for GoFiber App
-func DepartmentRouter(app fiber.Router, service department.Service) {
+func DepartmentRouter(app fiber.Router, service department.Service, middleware fiber.Handler) {
+	app.Use(middleware)
 	app.Get("/departments", handlers.GetDepartments(service))
 	app.Post("/departments", handlers.AddDepartment(service))
 	app.Put("/departments", handlers.UpdateDepartment(service))

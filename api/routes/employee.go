@@ -7,7 +7,8 @@ import (
 )
 
 // EmployeeRouter is the Router for GoFiber App
-func EmployeeRouter(app fiber.Router, service employee.Service) {
+func EmployeeRouter(app fiber.Router, service employee.Service, middleware fiber.Handler) {
+	app.Use(middleware)
 	app.Get("/employees", handlers.GetEmployees(service))
 	app.Post("/employees", handlers.AddEmployee(service))
 	app.Put("/employees", handlers.UpdateEmployee(service))
